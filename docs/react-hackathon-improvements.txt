@@ -1,0 +1,8 @@
+Known issues & improvements
+=================
+1. Changing item's title field in item type doesn't reflect the changes in existing inventories (issue)
+2. Validation in all fields has been left undone due to insufficient time (improvement)
+3. Validation on duplicate fields while adding into item type (improvement)
+4. We could add other attributes of each field type defined i.e. (date field may contains dateformat, number field may contain allow decimal or not, future date etc.) (improvement)
+
+
