@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import LayoutMaster from "./components/LayoutMaster";
+import InventoryTypes from "./pages/InventoryTypes";
+
+import { useDispatch } from "react-redux";
+import { fetchItemTypes } from "stores/actions/itemTypesApi";
+import InventoryEntries from "./pages/InventoryEntries";
+
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // load all existing inventories
+    dispatch(fetchItemTypes());
+  }, [dispatch]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route element={<LayoutMaster />}>
+          <Route exact path="/">
+            <Route index element={<InventoryEntries />} />
+            <Route path="/inventories/:id" element={<InventoryEntries />} />
+          </Route>
+
+          <Route path="/types" element={<InventoryTypes />} />
+        </Route>
+      </Routes>
     </div>
   );
-}
-
+};
 export default App;
