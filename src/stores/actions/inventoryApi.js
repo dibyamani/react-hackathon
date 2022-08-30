@@ -9,12 +9,15 @@ import {
 
 const STORE_INVENTORY = "inventories";
 
-export const fetchInventories = () => {
+export const fetchInventories = (id) => {
   return (dispatch) => {
     const data = getStore(STORE_INVENTORY, []);
-    sortBy(data, "itemTitle");
 
-    dispatch(initInventoriesState(data));
+    // filter data if id is available
+    const inventories = !id ? data : data.filter((x) => x.itemId === id);
+
+    sortBy(data, "itemTitle");
+    dispatch(initInventoriesState(inventories));
   };
 };
 

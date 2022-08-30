@@ -18,8 +18,8 @@ const InventoryEntries = () => {
 
   useEffect(() => {
     // load all existing inventories
-    dispatch(fetchInventories());
-  }, [dispatch]);
+    dispatch(fetchInventories(id));
+  }, [dispatch, id]);
 
   const onAddItemType = (itemId) => {
     const itemType = itemTypes.find((x) => x.id === itemId);
@@ -58,10 +58,6 @@ const InventoryEntries = () => {
     return <Menu onClick={onMenuClick} items={items} />;
   };
 
-  const filteredInventories = !id
-    ? inventories
-    : inventories.filter((x) => x.itemId === id);
-
   return (
     <div>
       <List
@@ -74,7 +70,7 @@ const InventoryEntries = () => {
           xl: 4,
           xxl: 4,
         }}
-        dataSource={filteredInventories}
+        dataSource={inventories}
         renderItem={(item) => (
           <List.Item>
             <ItemEntry data={item} />
